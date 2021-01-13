@@ -73,7 +73,7 @@ for (my $start=0; $start <= $#chr; $start++)
 	$start=$stop-1;
 	#last;
 }
-print "$short_cnt/$total\t$long_cnt/$total\t$total\n";
+print "short switch: $short_cnt/$total\tlong switch: $long_cnt/$total\n";
 
 
 my @sorted = sort { $a <=> $b } @phase_block_len;
@@ -85,6 +85,6 @@ foreach ( @sorted) {
 my $sum2=0;
 foreach ( @sorted) {
 	$sum2+=$_;
-	if(2*$sum2>$sum){print "$_\n"; last;}
+	if(2*$sum2>$sum){print "N50:$_\n"; last;}
 }
 close IN1;

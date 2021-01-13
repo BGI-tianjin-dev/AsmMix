@@ -54,12 +54,12 @@ chomp;
 	}
 }
 
-print STDERR "$#chr1\t$#pos1\t$#ref1\t$#alt1\t$#phase1\n";
-print STDERR "$#chr2\t$#pos2\t$#ref2\t$#alt2\t$#phase2\n";
+#print STDERR "$#chr1\t$#pos1\t$#ref1\t$#alt1\t$#phase1\n";
+#print STDERR "$#chr2\t$#pos2\t$#ref2\t$#alt2\t$#phase2\n";
 
 close IN1;
 close IN2;
-my ($i,$j);
+my ($i,$j,$cnt);
 $i=0;
 $j=0;
 
@@ -87,7 +87,10 @@ while( $i <= $#chr1 && $j<=$#chr2)
         my $cmpx=($phase1[$i] == $phase2[$j])?0:1;
         $info1[$i]=~/QNAME=(.+);QSTART=(.+);/;
         print "$chr1[$i]\t$pos1[$i]\t$cmpx\n";
+        $cnt++;
     }
     $i++;$j++;
     }
 }
+
+print STDERR "found $cnt hetero snps in $#chr1 benchmark snps\n";
