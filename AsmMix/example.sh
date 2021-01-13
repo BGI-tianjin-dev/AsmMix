@@ -1,3 +1,6 @@
+#command: example.sh stLFR_asm.fa SMS.fa
+#output will be mix.fa
+
 mkdir AsmMix_run
 quast.py $1 -r $2 -o AsmMix_run/quast -s -m 10000 -x7000 -t 32
 fa_name="${1%.*}"
