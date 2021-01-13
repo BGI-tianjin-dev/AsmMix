@@ -232,11 +232,11 @@ def parse_cs_tag(qseq, cs_tag, max_length_to_replace):
 
 def rearrange_replacements(replacements, target_seq_map, tmp_path,
                            max_length_to_replace, num_thread):
-    command = ' /home/wupei1/wupei1/software/minimap2 -c -x asm5 ' \
+    command = ' minimap2 -c -x asm5 ' \
               ' --mask-level 0.9' \
               ' --min-occ 200 -g 2500 --score-N 2 --cs -t 1 '
     repl_length = 0
-    parallel_command = ' /home/liuchao3/data/software/parallel-20200322/src/parallel --lb '
+    parallel_command = 'parallel --lb '
     fail_cnt = 0
     if not os.path.exists(tmp_path):
         if not os.path.isdir(tmp_path):
@@ -493,7 +493,7 @@ def main():
                         help="new target fasta file", type = str)
     parser.add_argument("--tmp_path", help="new target fasta file",
                         metavar='tmp_path', type = str,
-                        default='./tmp/spikeliu/alignment_para')
+                        default='./tmp/')
     parser.add_argument("--max-length-to-replace",
                         help="maximum length to replace(default: 50)",
                         metavar='max_length_to_replace', default=50, type=int)
