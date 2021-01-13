@@ -1,5 +1,6 @@
 #command: example.sh stLFR_asm.fa SMS.fa
 #output will be mix.fa
+#unzip fasta files before using, file prefix should not contain "."
 
 mkdir AsmMix_run
 quast.py $1 -r $2 -o AsmMix_run/quast -s -m 10000 -x7000 -t 32
