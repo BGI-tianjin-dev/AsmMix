@@ -1,4 +1,4 @@
-#dependencies
+# dependencies
 
 minimap2
 
@@ -8,7 +8,7 @@ truvari
 
 bcftools
 
-#usage
+# usage
 
 run `bash build_data.sh` to download all nessesary data 
 
