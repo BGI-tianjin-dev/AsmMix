@@ -1,4 +1,4 @@
-# AsmMix test
+# AsmMix
 
 This repository hosts supplementary files to "AsmMix:  A pipeline for high quality diploid de novo assembly"
 
