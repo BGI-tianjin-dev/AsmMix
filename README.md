@@ -73,6 +73,13 @@ asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pshap2.fasta --output asmmix_ps
 
 ### an example of mixing one haplotype-collapsed TGS long-read assembly with two haplotype-resolved SLR co-barcoded assemblies using trio binning
 
+If you have a pre-assembled TGS long-read assembly (tgsasm.fasta), and two pre-assembled SLR co-barcoded assembly (slrasm.mat.fasta && slrasm.pat.fasta), then
+
+```
+asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.mat.fasta --output asmmix_mat --quast quast/quast.py
+
+asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pat.fasta --output asmmix_pat --quast quast/quast.py
+```
 
 
 ## Output
