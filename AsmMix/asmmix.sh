@@ -165,81 +165,102 @@ print_info "Parsing args end ."
 ############################################################3########
 
 # check binary
-Candidate=$HOOM_DIR"/AsmMix/tgsgapcandidate"
-GapCloser=$HOOM_DIR"/AsmMix/tgsgapcloser"
-SeqGen=$HOOM_DIR"/AsmMix/tgsseqgen"
-SeqSplit=$HOOM_DIR"/AsmMix/tgsseqsplit"
+CREATDUMMY=$HOOM_DIR"/AsmMix/create_dummy_scaff_from_quast.py"
+EVASCAFF=$HOOM_DIR"/AsmMix/evaluate_scaff_struct.py"
+REPSEQ=$HOOM_DIR"/AsmMix/replace_sequence_parallel.py"
 
 print_info "Checking basic args & env ..."
 
-check_file_exe $Candidate
-check_file_exe $GapCloser
-check_file_exe $SeqGen
-check_file_exe $SeqSplit
-#check_file_exe $MiniMap2
+check_file_exe $CREATDUMMY
+check_file_exe $EVASCAFF
+check_file_exe $REPSEQ
+
 # check input args.
-check_arg_exist "input_scaff" $INPUT_SCAFF
-check_arg_exist "reads"  $TGS_READS
+check_arg_exist "tgsasm" $INPUT_TGS_ASM
+check_arg_exist "slrasm"  $INPUT_SLR_ASM
+check_arg_exist "quast"  $QUAST
 check_arg_null "output" $OUT_PREFIX
 
-if [[ $MIN_NREAD -lt 1 ]] ; then 
-    echo "Error : min_nread < 1. exit ..."
-    exit 1
-fi
-
-if [[ $NE == "no" ]] ; then
-    if [[ $NGS_READS != "" ]] ; then 
-        check_arg_exist "ngs" $NGS_READS
-        check_arg_exist "pilon" $PILON
-        check_arg_exe "samtools" $SAMTOOL
-        check_arg_exe "java" $JAVA
-        print_info_line "Doing error correction by pilon with ngs reads. "
-        USE_RACON="no"
-    else
-        check_arg_exe "racon" $RACON
-        print_info_line "Doing error correction by racon with tgs reads."
-        USE_RACON="yes"
-    fi
-else 
-    print_info_line "No error correction by --ne option"
-fi
-# pacbio special default values.
-if [[ $TGS_TYPE == "pb" ]] ; then 
-    if [[ $USE_NEW_MINMAP2_ARG != "yes" ]] ; then 
-        MINIMAP2_PARAM=" -x ava-pb "
-    fi
-    if [[ $MIN_IDY_USER == "no" ]] ; then
-        MIN_IDY="0.2"
-    fi
-    if [[ $MIN_MATCH_USER == "no" ]] ; then
-        MIN_MATCH="200"
-    fi
-fi
-print_info_line "TGS reads type is $TGS_TYPE . MINIMAP2_PARAM is $MINIMAP2_PARAM  MIN_IDY is $MIN_IDY . MIN_MATCH is $MIN_MATCH ."
 
 print_info "Checking basic args & env end."
 #####################################################################
 #
-#   step 1 , split input scaffold
+#   step 1, obtain mapping relationship of assemblies using quast
 #
 ############################################################3########
 
+print_info "Step 1 , run QUAST to obtain the mapping relationship of assemblies. "
+if [[ ! -e 'done_step1_tag' ]] ; then
+    mkdir AsmMix_run
+    ln -s $INPUT_TGS_ASM AsmMix_run/tgsasm.fasta
+    ln -s $INPUT_SLR_ASM AsmMix_run/slrasm.fasta
+    $QUAST slrasm.fasta -r tgsasm.fasta -o AsmMix_run/quast -s -m 10000 -x7000 -t $THREAD
 
-#command: example.sh stLFR_asm.fa SMS.fa
-#output will be mix.fa
-#unzip fasta files before using, file prefix should not contain "."
-
-mkdir AsmMix_run
-quast.py $1 -r $2 -o AsmMix_run/quast -s -m 10000 -x7000 -t 32
-fa_name="${1%.*}"
-
-create_dummy_scaff_from_quast.py AsmMix_run/quast/contigs_report_${fa_name}.stdout AsmMix_run/mix.scaff AsmMix_run/mix.blat
-evaluate_scaff_struct.py AsmMix_run/mix.scaff AsmMix_run/mix.blat > AsmMix_run/mix.eval
-replace_sequence_parallel.py --max-length-to-replace 50 --num-thread 32 \
-  $1 $2 AsmMix_run/mix.eval mix.fa
+    check_file AsmMix_run/quast/contigs_report_slrasm.stdout
+    date >>'done_step1_tag'
+else 
+    echo 'skip step1 since done_step1_tag exists'
+fi
+print_info "Step 1, done ."
 
 
+#####################################################################
+#
+#   step 2, create dummy scaff from quast
+#
+############################################################3########
 
+if [[ ! -e 'done_step2_tag' ]] ; then
+    $CREATDUMMY AsmMix_run/quast/contigs_report_slrasm.stdout AsmMix_run/mix.scaff AsmMix_run/mix.blat
+
+    check_file AsmMix_run/mix.blat
+    date >>'done_step2_tag'
+else 
+    echo 'skip step2 since done_step2_tag exists'
+fi
+print_info "Step 2, done ."
+
+
+#####################################################################
+#
+#   step 3, split input scaffold
+#
+############################################################3########
+
+if [[ ! -e 'done_step3_tag' ]] ; then
+    $EVASCAFF AsmMix_run/mix.scaff AsmMix_run/mix.blat > AsmMix_run/mix.eval
+
+    check_file AsmMix_run/mix.eval
+    date >>'done_step3_tag'
+else 
+    echo 'skip step3 since done_step3_tag exists'
+fi
+print_info "Step 3, done ."
+
+
+#####################################################################
+#
+#   step 4, split input scaffold
+#
+############################################################3########
+
+if [[ ! -e 'done_step4_tag' ]] ; then
+    $REPSEQ --max-length-to-replace $MAXLEN --num-thread $THREAD \
+  slrasm.fasta tgsasm.fasta AsmMix_run/mix.eval ${OUT_PREFIX}.fasta
+
+    check_file ${OUT_PREFIX}.fasta
+    date >>'done_step4_tag'
+else 
+    echo 'skip step4 since done_step4_tag exists'
+fi
+print_info "Step 4, done ."
+
+#####################################################################
+#
+# ALL DONE
+#
+#####################################################################
+print_info "ALL DONE !!! "
 
 
   
