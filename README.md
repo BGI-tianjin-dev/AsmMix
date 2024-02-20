@@ -5,24 +5,39 @@ AsmMix, which is capable of producing both contiguous and accurate diploid genom
 
 ## Citing AsmMix
 If you use AsmMix in your work, please cite:
-[AsmMix: A pipeline for high quality diploid de novo assembly](https://www.biorxiv.org/content/10.1101/2021.01.15.426893v1)
+[AsmMix: A pipeline for high-quality diploid de novo assembly](https://www.biorxiv.org/content/10.1101/2021.01.15.426893v1)
 Pei Wu, Chao Liu, Ou Wang, Xia Zhao, Fang Chen, Xiaofang Cheng, Hongmei Zhu
 doi: https://doi.org/10.1101/2021.01.15.426893
 
 ## Dependencies
 
+parallel
+
+python3
+
+pysam
+
+minimap2
 
 ## Installation
 
 ### Download 
 ```
-git clone  https://github.com/BGI-Qingdao/TGS-GapCloser.git YOUR-INSTALL-DIR
+git clone https://github.com/BGI-tianjin-dev/AsmMix.git YOUR-INSTALL-DIR
 ```
 
 ## Usage 
 
+
 ## Examples
-### an example of pre-corrected TGS reads without error correction 
+### an example of mixing one haplotype-collapsed TGS long-read assembly with one haplotype-collapsed SLR co-barcoded assembly
+
+
+### an example of mixing one haplotype-collapsed TGS long-read assembly with two pseudo-haplotype-resolved SLR co-barcoded assemblies
+
+
+### an example of mixing one haplotype-collapsed TGS long-read assembly with two haplotype-resolved SLR co-barcoded assemblies using trio binning
+
 
 
 ## Output
@@ -32,10 +47,10 @@ git clone  https://github.com/BGI-Qingdao/TGS-GapCloser.git YOUR-INSTALL-DIR
 [Evaluation](https://github.com/BGI-biotools/AsmMix/tree/main/Evaluation) are scripts for evaluation
 
 ## Contact
-Any questions, please feel free to ask xumengyang@genomics.cn or guolidong@genomics.cn
+Any questions, please feel free to ask liuchao3@genomics.cn
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=BGI-tianjin-dev/AsmMix&type=Date)](https://star-history.com/#BGI-tianjin-dev/AsmMix&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=AsmMix&type=Date)](https://star-history.com/#BGI-tianjin-dev/AsmMix&Date)
 
 
