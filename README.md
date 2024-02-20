@@ -25,6 +25,7 @@ minimap2
 ```
 git clone https://github.com/BGI-tianjin-dev/AsmMix.git YOUR-INSTALL-DIR
 ```
+No other installation is required.
 
 ## Usage 
 
