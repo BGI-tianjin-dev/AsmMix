@@ -20,6 +20,8 @@ python3
 
 pysam
 
+[minimap2](https://github.com/lh3/minimap2)
+
 [quast](https://github.com/ablab/quast)
 
 
