@@ -25,7 +25,7 @@ git clone https://github.com/BGI-tianjin-dev/AsmMix.git YOUR-INSTALL-DIR
 No other installation is required.
 
 ## Usage 
-* Only fasta format of TGS reads is acceptable. *
+* Only fasta format of TGS/SLR assembly is acceptable. *
 
 asmmix.sh  --tgsasm INPUT_TGS_ASM --slrasm INPUT_SLR_ASM --output OUT_PREFIX --quast quast/quast.py [options...]
   
