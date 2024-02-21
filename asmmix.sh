@@ -15,6 +15,7 @@
 VERSION="1.0.0"
 RELEASE_TIME="2024-02-20"
 HOOM_DIR=`dirname $0`
+chmod 777 $HOOM_DIR/asmmix.sh
 echo "INFO  :   Run asmmix.sh from $HOOM_DIR ;"
 echo "          Version : $VERSION ;"
 echo "          Release time : $RELEASE_TIME ."
@@ -167,10 +168,11 @@ print_info "Parsing args end ."
 #
 ############################################################3########
 
-# check binary
+# check python scripts
 CREATDUMMY=$HOOM_DIR"/AsmMix/create_dummy_scaff_from_quast.py"
 EVASCAFF=$HOOM_DIR"/AsmMix/evaluate_scaff_struct.py"
 REPSEQ=$HOOM_DIR"/AsmMix/replace_sequence_parallel.py"
+chmod 777 $CREATDUMMY $EVASCAFF $REPSEQ
 
 print_info "Checking basic args & env ..."
 
