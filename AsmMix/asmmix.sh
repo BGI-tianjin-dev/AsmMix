@@ -15,7 +15,7 @@
 VERSION="1.0.0"
 RELEASE_TIME="2024-02-20"
 HOOM_DIR=`dirname $0`
-echo "INFO  :   Run asmmix. from $HOOM_DIR ;"
+echo "INFO  :   Run asmmix.sh from $HOOM_DIR ;"
 echo "          Version : $VERSION ;"
 echo "          Release time : $RELEASE_TIME ."
 echo ""
