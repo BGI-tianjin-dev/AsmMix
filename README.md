@@ -36,7 +36,7 @@ No other installation is required.
 ## Usage 
 * Only fasta format of TGS/SLR assembly is acceptable. *
 
-asmmix.sh  --tgsasm INPUT_TGS_ASM --slrasm INPUT_SLR_ASM --output OUT_PREFIX --quast quast/quast.py [options...]
+sh asmmix.sh  --tgsasm INPUT_TGS_ASM --slrasm INPUT_SLR_ASM --output OUT_PREFIX --quast quast/quast.py [options...]
   
   required:
   
@@ -62,7 +62,7 @@ asmmix.sh  --tgsasm INPUT_TGS_ASM --slrasm INPUT_SLR_ASM --output OUT_PREFIX --q
 If you have a pre-assembled TGS long-read assembly (tgsasm.fasta), and a pre-assembled SLR co-barcoded assembly (slrasm.fasta), then
 
 ```
-asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.fasta --output asmmix --quast quast/quast.py
+sh asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.fasta --output asmmix --quast quast/quast.py
 ```
 
 ### an example of mixing one haplotype-collapsed TGS long-read assembly with two pseudo-haplotype-resolved SLR co-barcoded assemblies
@@ -70,9 +70,9 @@ asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.fasta --output asmmix --quast q
 If you have a pre-assembled TGS long-read assembly (tgsasm.fasta), and two pre-assembled SLR co-barcoded assembly (slrasm.pshap1.fasta && slrasm.pshap2.fasta), then
 
 ```
-asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pshap1.fasta --output asmmix_pshap1 --quast quast/quast.py
+sh asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pshap1.fasta --output asmmix_pshap1 --quast quast/quast.py
 
-asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pshap2.fasta --output asmmix_pshap2 --quast quast/quast.py
+sh asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pshap2.fasta --output asmmix_pshap2 --quast quast/quast.py
 ```
 
 ### an example of mixing one haplotype-collapsed TGS long-read assembly with two haplotype-resolved SLR co-barcoded assemblies using trio binning
@@ -80,9 +80,9 @@ asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pshap2.fasta --output asmmix_ps
 If you have a pre-assembled TGS long-read assembly (tgsasm.fasta), and two pre-assembled SLR co-barcoded assembly (slrasm.mat.fasta && slrasm.pat.fasta), then
 
 ```
-asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.mat.fasta --output asmmix_mat --quast quast/quast.py
+sh asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.mat.fasta --output asmmix_mat --quast quast/quast.py
 
-asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pat.fasta --output asmmix_pat --quast quast/quast.py
+sh asmmix.sh  --tgsasm tgsasm.fasta --slrasm slrasm.pat.fasta --output asmmix_pat --quast quast/quast.py
 ```
 
 
