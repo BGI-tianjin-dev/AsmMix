@@ -44,7 +44,7 @@ function print_fatal()
 function print_help()
 {
     echo "Usage:"
-    echo "      asmmix.sh  --tgsasm INPUT_TGS_ASM --slrasm INPUT_SLR_ASM --output OUT_PREFIX --quast quast/quast.py [options...]"
+    echo "      sh asmmix.sh  --tgsasm INPUT_TGS_ASM --slrasm INPUT_SLR_ASM --output OUT_PREFIX --quast quast/quast.py [options...]"
     echo "      required:"
     echo "          --tgsasm     <tgs_assmbly_file>      input TGS assembly."
     echo "          --slrasm     <slr_assembly_file>     input SLR assembly."
