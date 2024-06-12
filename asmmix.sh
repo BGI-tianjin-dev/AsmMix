@@ -106,7 +106,7 @@ if [[ $# -lt 1 ]] ; then
     print_help
     exit 0 ;
 fi
-ARGS=`getopt -o h  --long tgsasm:,slrasm:,output:,quast:,max-length-to-replace:,num-thread  -- "$@"`
+ARGS=`getopt -o h  --long tgsasm:,slrasm:,output:,quast:,max-length-to-replace:,num-thread:  -- "$@"`
 eval set -- "$ARGS"
 while true; do
     case "$1" in
